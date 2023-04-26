@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Логин{% endblock %}
+
+{% block content %}
+    <h1>Логин</h1>
+    {% if forms.errors %}
+        <p>
+            Ваше имя пользователя и пароль не совпадают.
+            Пожалуйста, попробуйте еще раз.
+        </p>
+    {% else %}
+        <p> Пожалуйста используйте следующую форму для входа:</p>
+    {% endif %}
+    <div class="login-form">
+        <form action="{% url 'login' %}" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <p><input type="submit" value="Войти"></p>
+        </form>
+        <p>
+            <a href="{% url 'password_reset' %}">
+                Забыли свой пароль?
+            </a>
+        </p>
+    </div>
+
+{% endblock %}
