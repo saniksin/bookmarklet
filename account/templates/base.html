@@ -26,10 +26,33 @@
             Привет {{ request.user.first_name|default:request.user.username }},
             <a href="{% url 'logout' %}">Выйти</a>
             {% else %}
-                <a href="{% url 'login' %}">Войти</a>
+                <a href="{% url 'login' %}">Войти</a> /
+                <a href="{% url 'register' %}">Регистрация</a>
             {% endif %}
         </span>
     </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let closeBtns = document.querySelectorAll('.close');
+            closeBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+        });
+    </script>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">
+                    {{ message|safe }}
+                    <a href="#" class="close">x</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <div id="content">
         {% block content %}
         {% endblock %}
