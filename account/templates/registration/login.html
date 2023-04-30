@@ -29,5 +29,13 @@
         <a href="{% url 'register'%}">зарегистрируйтесь</a>.
         </p>
     </div>
-
+    <div class="social">
+        <ul>
+            <li class="facebook">
+                <a href="{% url "social:begin" "facebook" %}">
+                    Войдите через Facebook
+                </a>
+            </li>
+        </ul>
+    </div>
 {% endblock %}
