@@ -4,7 +4,17 @@
 
 {% block content %}
     <h1>Панель управления</h1>
-    <p>Добро пожаловать в вашу панель управления.</p>  
+    {% with total_images_created=request.user.images_created.count %}
+        <p>
+            Добро пожаловать в вашу панель управления.
+            Вы добавили в закладки {{ total_images_created }} изображений {{total_images_created|pluralize }}
+        </p>
+    {% endwith %}
+    <p>Перетащите следующую кнопку на панель закладок,
+        чтобы добавлять в закладки изображения с других веб-сайтов →
+    <a href="javascript:{% include "bookmarklet_launcher.js" %}"
+    class="button">Добавить в закладки</a>
+    </p>
     <p> Вы можете 
     <a href="{% url 'edit' %}">изменить свой профиль</a> или
     <a href="{% url 'password_change' %}">изменить свой пароль</a>.
